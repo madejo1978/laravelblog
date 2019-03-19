@@ -10,7 +10,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;                               //  activate model to fetch data (namespace = App title = Post)
+use App\Post;            //  activate model to fetch data (namespace = App title = Post)
+use DB;                  // if you want to use the sql-querie instead of Elequent. Activatie the DB-library: use DB   
 
 class PostsController extends Controller
 {
@@ -24,12 +25,29 @@ class PostsController extends Controller
      
     public function index()
     {
-        // return Post::all();                         // part of elequent, will fetch all the data  
-                                                       // 'returns' the data in an array
+        // return Post::all();      // part of elequent, will fetch all the data  
+                                    // 'returns' the data in an array
         
-        $posts = Post::all();                          // put it in an variable
+        // $posts = Post::all();    // put it in an variable
+        
+        // instead of all(), you can use orderBy()->get() is always needed i.c.:
+        // $posts = Post::orderBy('title','desc')->get();
+        
+        // with take() you can limit the number of posts 
+            // $posts = Post::orderBy('title','desc')->take(2)->get();
+        
+            //  $posts = DB::select('SELECT * FROM posts'); // SQL-query is also possible
+        // instead of getting by ID, you can use where.  
+            // example is get by title:
+                // return Post::where('title','Post Two')->get();
+
+        // automatic page-numbering with: paginate() and {{$posts->links()}} in the views 
+        $posts = Post::orderBy('title','desc')->paginate(1);
+
+        // put it into view with: with()
         return view('posts.index')->with('posts',$posts);
-    }                                                       // put it into view with with()
+
+    }                                                       
 
     /**
      * Show the form for creating a new resource.
@@ -60,7 +78,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        return Post::find($id);
+        // return Post::find($id);
+        $post = Post::find($id);
+        return view('posts.show')->with('post', $post); // show.blade.php
     }
 
     /**
