@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Post;            //  activate model to fetch data (namespace = App title = Post)
 use DB;                  // if you want to use the sql-querie instead of Elequent. Activatie the DB-library: use DB   
 
+
 class PostsController extends Controller
 {
     /**
@@ -102,9 +103,10 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id) // example.com/projects/1/edit
     {
-        //
+        $post = Post::find($id);
+        return view('posts.edit')->with('post', $post);
     }
 
     /**
@@ -114,9 +116,36 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
+    // public function update(Request $request, $id)
     {
-        //
+        // dd('hello');  // laravels: echo console.log means: Die and Dump 
+        // dd(request()->all());
+        
+        $post = Post::find($id);
+
+        $post->title = request('title');
+        $post->body  = request('body');
+        $post->save();
+        
+        return redirect('/posts')->with('success','Youre Blog has been updated'); 
+        
+        /* 
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'body'  => 'required'
+        ]);
+
+        // Edit post     
+        $post = Post::find($id);
+
+        $post->title = $request('title');
+        $post->body  = $request('body');
+
+        $post->save();
+
+        return redirect('/posts')->with('success','Youre Blog has been updated'); 
+     */
     }
 
     /**
