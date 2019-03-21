@@ -14,5 +14,11 @@
             @include('inc.messages')    
             @yield('content')
         </div>
+
+       
+        <script src="https://cdn.ckeditor.com/4.11.3/standard/ckeditor.js"></script>
+        <script>
+            CKEDITOR.replace( 'editor1' );
+        </script>
     </body>
 </html>

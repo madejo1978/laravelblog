@@ -4,7 +4,11 @@
     <br>
     <h1>{{$post->title}}</h1>
     <div>
-            {{$post->body}}
+        {{-- without formatting --}}
+            {{--    {{$post->body}} --}}
+         
+        {{-- with formatting --}}
+            {!! nl2br( e( $post->body ) ) !!}
     </div>
     <hr>
     <small>Written on {{$post->created_at}}</small> 

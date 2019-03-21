@@ -42,7 +42,7 @@ class PostsController extends Controller
                 // return Post::where('title','Post Two')->get();
 
         // automatic page-numbering with: paginate() and {{$posts->links()}} in the views 
-        $posts = Post::orderBy('title','asc')->paginate(5);
+        $posts = Post::orderBy('created_at','desc')->paginate(5);
 
         // put it into view with: with()
         return view('posts.index')->with('posts',$posts);
@@ -80,7 +80,7 @@ class PostsController extends Controller
         $post->body = $request->input('body');    
         $post->save();
 
-        return redirect('/posts');
+        return redirect('/posts')->with('success','Youre new Blog is created at the top of this page');
     }
 
     /**
