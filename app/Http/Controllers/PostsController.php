@@ -30,7 +30,7 @@ class PostsController extends Controller
         
         // $posts = Post::all();    // put it in an variable
         
-        // instead of all(), you can use orderBy()->get() is always needed i.c.:
+        // instead of all(), you can use orderBy(), but only works with get(): orderBy()->get()
         // $posts = Post::orderBy('title','desc')->get();
         
         // with take() you can limit the number of posts 
@@ -42,7 +42,7 @@ class PostsController extends Controller
                 // return Post::where('title','Post Two')->get();
 
         // automatic page-numbering with: paginate() and {{$posts->links()}} in the views 
-        $posts = Post::orderBy('title','desc')->paginate(1);
+        $posts = Post::orderBy('title','asc')->paginate(5);
 
         // put it into view with: with()
         return view('posts.index')->with('posts',$posts);
@@ -56,7 +56,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -67,7 +67,20 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'body'  => 'required',
+        ]);
+            // return 'title en body are filled-in AND the button submit is pressed'
+            // return request()->all();
+        
+        // create post
+        $post = new Post;
+        $post->title = $request->input('title');    
+        $post->body = $request->input('body');    
+        $post->save();
+
+        return redirect('/posts');
     }
 
     /**

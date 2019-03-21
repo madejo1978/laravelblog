@@ -65,10 +65,15 @@ Route::get('/about', function() {
 Route::get('/', 'PagesController@index');  // @ means it loads the method index() declared in PagesController
 Route::get('/about', 'PagesController@about');  
 Route::get('/services', 'PagesController@services');  
+//form + validation
+Route::post('/posts', 'PostsController@store');  
+Route::get('/posts/create', 'PostsController@create');  
+
+  
 
 // the command: php artisan route:list
     // shows the existing routes
-    // if you create a new route in this file, it will also show up in the list
-    // the route will connect with the functions/methods created in the PostsController
+        // if you create a new route in this file, it will also show up in the list
+        // the route will connect with the functions/methods created in the PostsController
 Route::resource('posts', 'PostsController');  
                 

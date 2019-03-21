@@ -11,7 +11,8 @@
         @include('inc.navbar') {{-- inc/navbar --}}
         
         <div class="container">   
-                @yield('content')
+            @include('inc.messages')    
+            @yield('content')
         </div>
     </body>
 </html>
