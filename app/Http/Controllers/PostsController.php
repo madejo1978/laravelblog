@@ -5,6 +5,7 @@
     // with the --resource: it creates also function/methods 
     // these are methods for using CRUD 
 
+// findOrFail() is better to use than find(), it gives an error-code if not found
 
 
 namespace App\Http\Controllers;
@@ -92,8 +93,8 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        // return Post::find($id);
-        $post = Post::find($id);
+        // return Post::findOrFail($id);
+        $post = Post::findOrFail($id);
         return view('posts.show')->with('post', $post); // show.blade.php
     }
 
@@ -105,7 +106,7 @@ class PostsController extends Controller
      */
     public function edit($id) // example.com/projects/1/edit
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         return view('posts.edit')->with('post', $post);
     }
 
@@ -122,7 +123,7 @@ class PostsController extends Controller
         // dd('hello');  // laravels: echo console.log means: Die and Dump 
         // dd(request()->all());
         
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
 
         $post->title = request('title');
         $post->body  = request('body');
@@ -137,7 +138,7 @@ class PostsController extends Controller
         ]);
 
         // Edit post     
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
 
         $post->title = $request('title');
         $post->body  = $request('body');
@@ -156,6 +157,8 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // dd('delete', $id);
+        Post::findOrFail($id)->delete();
+        return redirect('/posts')->with('success','Youre Blog has been deleted');
     }
 }

@@ -15,9 +15,13 @@
 
 
     <form method="POST" action="/posts/{{$post->id}}">
-       {{ method_field('PATCH') }}   {{-- creates a "hidden input", php artisan route:list --}}
-       {{ csrf_field() }}
-          
+       {{-- {{ method_field('PATCH') }} --}}   {{-- creates a "hidden input", php artisan route:list --}}
+       {{-- {{ csrf_field() }} --}}
+       
+       {{-- shorter syntax --}}
+       @method('PATCH')
+       @csrf
+       
         <div class="form-group">
             <input type="text" name="title" placeholder="Title" value="{{ $post->title }}">    
         </div>
@@ -28,7 +32,7 @@
             <button type="submit" class="btn btn-primary">Update this Blog</button>
         </div>
     </form>
-     
+        
 @endsection
 
  
