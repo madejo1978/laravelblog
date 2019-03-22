@@ -77,9 +77,11 @@ class PostsController extends Controller
             // return request()->all();
         
         // create post
+            // with user-identification
         $post = new Post;
         $post->title = $request->input('title');    
-        $post->body = $request->input('body');    
+        $post->body = $request->input('body');   
+        $post->user_id = auth()->user()->id; // the currentlu loggein user_id will be put in the user_id 
         $post->save();
 
         return redirect('/posts')->with('success','Youre new Blog is created at the top of this page');

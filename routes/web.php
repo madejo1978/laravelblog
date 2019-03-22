@@ -77,3 +77,6 @@ Route::get('/posts/create', 'PostsController@create');
         // the route will connect with the functions/methods created in the PostsController
 Route::resource('posts', 'PostsController');  
                 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
