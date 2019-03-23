@@ -3,7 +3,7 @@
 @section('content')
     <div class="jumbotron text-center">
         <h1>{{$title}}</h1> {{-- title is specified in PagesController.php --}}
-        <p>Laravel from scratch</p>
+        <p>Taking BlogginG to the next leveL</p>
         <p>
             <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
             <a class="btn btn-primary btn-lg" href="/register" role="button">Register</a>

@@ -71,7 +71,7 @@ class PostsController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required',
-            'body'  => 'required',
+            'body'  => 'required'
         ]);
             // return 'title en body are filled-in AND the button submit is pressed'
             // return request()->all();
@@ -81,7 +81,7 @@ class PostsController extends Controller
         $post = new Post;
         $post->title = $request->input('title');    
         $post->body = $request->input('body');   
-        $post->user_id = auth()->user()->id; // the currentlu loggein user_id will be put in the user_id 
+        $post->user_id = auth()->user()->id; // the currenty loggedin user_id will be put in the user_id 
         $post->save();
 
         return redirect('/posts')->with('success','Youre new Blog is created at the top of this page');

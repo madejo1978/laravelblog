@@ -13,25 +13,28 @@
     </div>
 @endif
 
-
+<div class="jumbotron">
     <form method="POST" action="/posts/{{$post->id}}">
-       {{-- {{ method_field('PATCH') }} --}}   {{-- creates a "hidden input", php artisan route:list --}}
-       {{-- {{ csrf_field() }} --}}
-       
-       {{-- shorter syntax --}}
+       {{-- 
+         method_field('PATCH') creates a "hidden input", php artisan route:list 
+       csrf_field()  
+      
+       shorter syntax --}} 
        @method('PATCH')
-       @csrf
+       @csrf 
        
         <div class="form-group">
-            <input type="text" name="title" placeholder="Title" value="{{ $post->title }}">    
+            <input type="text" name="title" value="{{ $post->title }}">    
         </div>
         <div class="form-group">
-            <textarea name="body" id="editor1" cols="30" rows="10" placeholder="Text">{{ $post->body }}</textarea> {{-- id is used for  --}}
+            <textarea name="body" cols="100" rows="10">{{ $post->body }}</textarea> 
         </div>
         <div>
-            <button type="submit" class="btn btn-primary">Update this Blog</button>
+                <a href="/posts" class="btn btn-primary">Go Back</a>
+            <button type="submit" class="btn btn-secondary">Update this Blog</button>
         </div>
     </form>
+</div>
         
 @endsection
 

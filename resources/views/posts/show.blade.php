@@ -5,10 +5,10 @@
     <h1>{{$post->title}}</h1>
     <div>
         {{-- without formatting --}}
-            {{--    {{$post->body}} --}}
+        {{$post->body}}
          
-        {{-- with formatting --}}
-            {!! nl2br( e( $post->body ) ) !!}
+        {{-- with formatting
+            {!! nl2br( e( $post->body ) ) !!}  --}}
     </div>
     <hr>
     <small>Written on {{$post->created_at}}</small> 

@@ -23,7 +23,7 @@ class PagesController extends Controller
 class PagesController extends Controller
 {
     public function index(){            
-        $title = 'Welcome to Laravel!'; // bring into template/view, 2 ways
+        $title = 'Welcome'; // bring into template/view, 2 ways
         // return view('pages.index',compact('title')); // is going to look in the folder resources\views\pages\index.blade.php
         return view('pages.index')->with('title',$title);
     }
@@ -35,9 +35,11 @@ class PagesController extends Controller
 
     public function services(){            
         $data = array(
-            'title' => 'Services output multiple variables in an Array',
-            'services' => ['Webdesign', 'Programming', 'SEO']
+            'title' => 'Services',
+            'services' => ['adipiscing', 'eiusmod', 'adipiscing']
         );
         return view('pages.services')->with($data);  
     }
 }
+
+
