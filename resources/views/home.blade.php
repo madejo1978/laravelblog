@@ -28,9 +28,16 @@
                                 </tr>
                                 @foreach($posts as $post)
                                 <tr>
-                                    <th>{{$post->title}}</th>
-                                    <th><a href="/posts/{{$post->id}}/edit" class="btn btn-secondary">Edit</a></th>
-                                    <th></th>
+                                    <td>{{$post->title}}</td>
+                                    <td></td>
+                                    <td>
+                                        <form method="POST" class="" action="/posts/{{$post->id}}">
+                                            @method('DELETE')
+                                            @csrf
+                                                <button type="submit" class="btn btn-danger float-right">Delete</button>
+                                                <a href="/posts/{{$post->id}}/edit" class="btn btn-secondary float-right">Edit</a>
+                                            </form>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </table>
@@ -39,6 +46,9 @@
                                 <p>Please write your first Blog!</p>
                             </div>
                         @endif
+                    <div class="panel-body">
+                            <a href="/posts" class="btn btn-primary">Go Back</a>
+                    </div>
                 </div>
             </div>
         </div>
