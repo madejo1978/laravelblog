@@ -14,9 +14,28 @@ use Illuminate\Http\Request;
 use App\Post;            //  activate model to fetch data (namespace = App title = Post)
 use DB;                  // if you want to use the sql-querie instead of Elequent. Activatie the DB-library: use DB   
 
-
 class PostsController extends Controller
 {
+
+    /**
+     * Middleware provide a convenient mechanism for filtering HTTP requests entering your   
+     * application. If the user is not authenticated, the middleware will redirect the user to 
+     * the login screen    
+     
+     * Get the path the user should be redirected to when they are not authenticated.
+     
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+
+    // 2nd parameter are exceptions in an array which you can see when not logged in 
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);   
+    }
+
+
     /**
      * Display a listing of the resource.
      *
