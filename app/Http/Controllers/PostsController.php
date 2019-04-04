@@ -128,9 +128,17 @@ class PostsController extends Controller
     public function edit($id) // example.com/projects/1/edit
     {
         $post = Post::findOrFail($id);
+
+        // check if the ID is allowed to this Blog
+        // if not redirect and sent an 'error'-message
+        if(auth()->user()->id !== $post->user_id){
+            return redirect('/posts')->with('success','Unauthorized Page');    
+        }
+
         return view('posts.edit')->with('post', $post);
     }
-
+    
+    
     /**
      * Update the specified resource in storage.
      *
@@ -180,6 +188,7 @@ class PostsController extends Controller
     {
         // dd('delete', $id);
         Post::findOrFail($id)->delete();
+
         return redirect('/posts')->with('success','Youre Blog has been deleted');
     }
 }

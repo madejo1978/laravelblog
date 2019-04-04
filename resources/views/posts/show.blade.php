@@ -16,19 +16,22 @@
 
 {{-- if guest logged in then don't show edit and delete buttons --}}
     @if(!Auth::guest())
-        <form method="POST" class="" action="/posts/{{$post->id}}">
-     
-            {{-- {{ method_field('DELETE') }} --}}   {{-- creates a "hidden input", php artisan route:list --}}
-            {{--   {{ csrf_field() }} --}}   
+    {{-- only show these buttons if user matches the user-Blog-ID --}}    
+        @if(Auth::user()->id == $post->user_id)
+            <form method="POST" class="" action="/posts/{{$post->id}}">
             
-            {{-- shorter syntax: --}}
-           @method('DELETE')
-           @csrf
-          <div>
-                <a href="/posts" class="btn btn-primary">Go Back</a>
-                <a href="/posts/{{$post->id}}/edit" class="btn btn-secondary">Edit</a>
-                <button type="submit" class="btn btn-danger float-right">Delete</button>
-           </div>
-       </form>
+                    {{-- {{ method_field('DELETE') }} --}}   {{-- creates a "hidden input", php artisan route:list --}}
+                    {{--   {{ csrf_field() }} --}}   
+                    
+                    {{-- shorter syntax: --}}
+                @method('DELETE')
+                @csrf
+                <div>
+                        <a href="/posts" class="btn btn-primary">Go Back</a>
+                        <a href="/posts/{{$post->id}}/edit" class="btn btn-secondary">Edit</a>
+                        <button type="submit" class="btn btn-danger float-right">Delete</button>
+                </div>
+            </form>
+        @endif
     @endif
 @endsection
