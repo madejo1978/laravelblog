@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-/* 
+ 
 // in this model you can adjust the tables, for example the names:
     // Table Name
     protected $table = 'posts';
@@ -15,4 +15,8 @@ class Post extends Model
     // Timestamps
     public $timestamps = true;
 
- */}
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
+
+ }
