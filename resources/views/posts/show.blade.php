@@ -14,14 +14,14 @@
     <small>Written on {{$post->created_at}} by {{$post->user->name}}</small> 
     <br><br>
 
-
-    
-    <form method="POST" class="" action="/posts/{{$post->id}}">
+{{-- if guest logged in then don't show edit and delete buttons --}}
+    @if(!Auth::guest())
+        <form method="POST" class="" action="/posts/{{$post->id}}">
      
-        {{-- {{ method_field('DELETE') }} --}}   {{-- creates a "hidden input", php artisan route:list --}}
-        {{--   {{ csrf_field() }} --}}   
-        
-        {{-- shorter syntax: --}}
+            {{-- {{ method_field('DELETE') }} --}}   {{-- creates a "hidden input", php artisan route:list --}}
+            {{--   {{ csrf_field() }} --}}   
+            
+            {{-- shorter syntax: --}}
            @method('DELETE')
            @csrf
           <div>
@@ -30,5 +30,5 @@
                 <button type="submit" class="btn btn-danger float-right">Delete</button>
            </div>
        </form>
-    
+    @endif
 @endsection

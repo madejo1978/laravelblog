@@ -8,4 +8,4 @@ v1.6
 v1.7
 v1.8
 v1.9 created relation between user-id and blogs v1.9.1 
-v2.0 created authentication
+v2.0 created authentication v2.1
